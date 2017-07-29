@@ -34,7 +34,30 @@ public class JDBCUtil {
      * 清理环境，关闭连接(顺序:后打开的先关闭)
      */
     public void close(Connection conn, PreparedStatement ps, ResultSet rs){
-
+        if(rs != null){
+            try{
+                rs.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        if(ps != null){
+            try{
+                ps.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        if(conn != null){
+            try{
+                conn.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }
